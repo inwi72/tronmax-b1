@@ -14,11 +14,28 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
         {/* Hero Content */}
         <div className="mb-16">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#21C7E6] via-[#FF6200] to-[#21C7E6] bg-clip-text text-transparent mb-6">
-            Welcome to TronMax - Your TRX Gateway
+            Welcome to TonMax - Your TRX Gateway
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-[#E5E5E5] max-w-3xl mx-auto mb-4">
             The ultimate platform to earn free TRX through our faucet, exciting games, staking rewards, and referral program.
           </p>
+          <div className="bg-[#1A1A1A] border border-[#21C7E6]/30 rounded-lg p-6 max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold text-white mb-4">Why Choose TonMax?</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-[#21C7E6] rounded-full"></div>
+                <span className="text-[#E5E5E5]">Instant TRX payouts every hour</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-[#FF6200] rounded-full"></div>
+                <span className="text-[#E5E5E5]">Provably fair gaming system</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-[#21C7E6] rounded-full"></div>
+                <span className="text-[#E5E5E5]">Secure & transparent platform</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Three-Column Feature Highlights */}
@@ -36,9 +53,9 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
             </p>
             <button
               onClick={onPlayHiLo}
-              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25"
             >
-              Play Now
+              Start Earning TRX Now
             </button>
           </div>
 
@@ -55,9 +72,9 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
             </p>
             <button
               onClick={onStartStaking}
-              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25"
             >
-              Start Staking
+              Start Earning TRX Now
             </button>
           </div>
 
@@ -74,15 +91,15 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
             </p>
             <button
               onClick={onCopyReferral}
-              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25"
             >
-              Copy Referral Link
+              Start Earning TRX Now
             </button>
           </div>
         </div>
 
         {/* Trust & Security Badges */}
-        <div className="flex justify-center space-x-6 text-sm text-gray-300">
+        <div className="flex justify-center space-x-6 text-sm text-[#E5E5E5] mt-12">
           <span>🔒 Secure</span>
           <span>⚡ Instant Free TRX</span>
           <span>📊 Provably Fair</span>
@@ -91,4 +108,3 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
     </div>
   );
 }
-
