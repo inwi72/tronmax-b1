@@ -31,9 +31,10 @@ export default function Footer() {
           </a>
         </div>
         <div className="mt-4 text-xs text-gray-400">
-          © 2025 TRXFaucet. All rights reserved.
+          © 2025 TonMax. All rights reserved.
         </div>
       </div>
     </footer>
   );
+
 }
