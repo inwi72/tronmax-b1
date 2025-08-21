@@ -1,92 +1,133 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import Navigation from './components/Navigation';
+import BalanceDisplay from './components/BalanceDisplay';
+import FaucetClaim from './components/FaucetClaim';
+import StatsDisplay from './components/StatsDisplay';
+import HiLoGame from './components/HiLoGame';
+import AuthModal from './components/AuthModal';
+import HiLoPopup from './components/HiLoPopup';
+import PageContent from './components/PageContent';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home');
+  const [balance, setBalance] = useState(5.234567);
+  const [canClaim, setCanClaim] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [authModal, setAuthModal] = useState<'login' | 'register' | null>(null);
+  const [showHiLoPopup, setShowHiLoPopup] = useState(false);
+  const [lastClaimAmount, setLastClaimAmount] = useState(0);
+
+  const stats = {
+    totalUsers: 45678,
+    totalClaimed: 2345678,
+    totalPayouts: 98765,
+    avgClaimTime: '45 min',
+  };
+
+  // Countdown timer effect
+  useEffect(() => {
+    if (!canClaim && timeLeft > 0) {
+      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearTimeout(timer);
+    } else if (timeLeft === 0 && !canClaim) {
+      setCanClaim(true);
+    }
+  }, [canClaim, timeLeft]);
+
+  const handleClaim = () => {
+    const claimAmount = Math.random() * (0.5 - 0.1) + 0.1; // Random between 0.1-0.5
+    setBalance(balance + claimAmount);
+    setLastClaimAmount(claimAmount);
+    setCanClaim(false);
+    setTimeLeft(3600); // 1 hour cooldown
+  };
+
+  const handleLogin = (email: string, password: string) => {
+    // Mock login
+    setIsAuthenticated(true);
+    setAuthModal(null);
+  };
+
+  const handleRegister = (email: string, password: string, username: string) => {
+    // Mock register
+    setIsAuthenticated(true);
+    setAuthModal(null);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setCurrentPage('home');
+  };
+
+  const handlePlayHiLo = () => {
+    setShowHiLoPopup(false);
+    setCurrentPage('home'); // Stay on home where HI-LO game is visible
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-gray-950 text-white font-sans">
-      {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center text-center py-24 px-6 bg-gradient-to-b from-gray-900 to-black">
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
-          Win Free TRX Every Hour
-        </h1>
-        <p className="text-lg md:text-xl text-gray-300 max-w-2xl mb-8">
-          Join TronMax and start earning TRX effortlessly. Claim rewards, stake
-          for higher profits, and explore fun games like Dice.
-        </p>
-        <div className="flex space-x-4">
-          <a
-            href="/register"
-            className="px-6 py-3 rounded-2xl bg-red-600 hover:bg-red-700 transition shadow-lg"
-          >
-            Get Started
-          </a>
-          <a
-            href="/faucet"
-            className="px-6 py-3 rounded-2xl border border-red-600 hover:bg-red-600 transition shadow-lg"
-          >
-            Try Faucet
-          </a>
-        </div>
-      </section>
+    <div className="min-h-screen bg-gradient-to-br from-[#0B0B0B] via-[#1A1A1A] to-[#0B0B0B]">
+      <Navigation
+        isAuthenticated={isAuthenticated}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        onLogin={() => setAuthModal('login')}
+        onRegister={() => setAuthModal('register')}
+        onLogout={handleLogout}
+      />
 
-      {/* Features Section */}
-      <section className="py-20 px-6 grid gap-12 md:grid-cols-3 text-center">
-        <div className="p-6 rounded-2xl bg-gray-900 shadow-md hover:shadow-red-600/40 transition">
-          <h2 className="text-xl font-semibold mb-4">🚀 Free Faucet</h2>
-          <p className="text-gray-400">
-            Claim free TRX every hour with our secure faucet system powered by
-            ReCAPTCHA.
-          </p>
-        </div>
-        <div className="p-6 rounded-2xl bg-gray-900 shadow-md hover:shadow-red-600/40 transition">
-          <h2 className="text-xl font-semibold mb-4">💎 Staking</h2>
-          <p className="text-gray-400">
-            Stake your TRX and enjoy daily profits with transparent and
-            automated payouts.
-          </p>
-        </div>
-        <div className="p-6 rounded-2xl bg-gray-900 shadow-md hover:shadow-red-600/40 transition">
-          <h2 className="text-xl font-semibold mb-4">🎲 Dice Game</h2>
-          <p className="text-gray-400">
-            Double your fun! Play our simple high/low dice game for extra TRX
-            rewards.
-          </p>
-        </div>
-      </section>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {currentPage === 'home' ? (
+          <>
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#21C7E6] via-[#FF6200] to-[#21C7E6] bg-clip-text text-transparent mb-4">
+                Free TRX Faucet
+              </h1>
+              <p className="text-xl text-[#E5E5E5] max-w-2xl mx-auto">
+                Claim free TRX every hour, play games to multiply your rewards, and build your crypto portfolio
+              </p>
+            </div>
 
-      {/* Call To Action */}
-      <section className="text-center py-16 px-6 bg-gradient-to-r from-red-700 to-red-500">
-        <h2 className="text-3xl font-bold mb-4">Start Earning TRX Today!</h2>
-        <p className="text-gray-200 mb-6">
-          Sign up now and join thousands of users already earning with TronMax.
-        </p>
-        <a
-          href="/register"
-          className="px-8 py-3 bg-black rounded-2xl hover:bg-gray-900 transition shadow-lg"
-        >
-          Create Account
-        </a>
-      </section>
+            <BalanceDisplay balance={balance} isAuthenticated={isAuthenticated} />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              <FaucetClaim
+                isAuthenticated={isAuthenticated}
+                canClaim={canClaim}
+                timeLeft={timeLeft}
+                onClaim={handleClaim}
+                onShowHiLoPopup={() => setShowHiLoPopup(true)}
+              />
+              
+              {isAuthenticated && (
+                <HiLoGame
+                  isAuthenticated={isAuthenticated}
+                  balance={balance}
+                  onBalanceUpdate={setBalance}
+                />
+              )}
+            </div>
 
-      {/* Footer */}
-      <footer className="mt-auto py-8 bg-black text-gray-400 text-sm">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center px-6">
-          <p>© {new Date().getFullYear()} TronMax. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="/about" className="hover:text-white transition">
-              About
-            </a>
-            <a href="/terms" className="hover:text-white transition">
-              Terms
-            </a>
-            <a href="/privacy" className="hover:text-white transition">
-              Privacy
-            </a>
-            <a href="/contact" className="hover:text-white transition">
-              Contact
-            </a>
-          </div>
-        </div>
-      </footer>
+            <StatsDisplay stats={stats} />
+          </>
+        ) : (
+          <PageContent page={currentPage} />
+        )}
+      </div>
+
+      <AuthModal
+        isOpen={authModal !== null}
+        type={authModal || 'login'}
+        onClose={() => setAuthModal(null)}
+        onSubmit={authModal === 'login' ? handleLogin : handleRegister}
+      />
+
+      <HiLoPopup
+        isOpen={showHiLoPopup}
+        onClose={() => setShowHiLoPopup(false)}
+        onPlayNow={handlePlayHiLo}
+        lastClaimAmount={lastClaimAmount}
+      />
     </div>
   );
 }
