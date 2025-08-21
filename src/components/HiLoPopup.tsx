@@ -53,13 +53,13 @@ export default function HiLoPopup({ isOpen, onClose, onPlayNow, lastClaimAmount 
         <div className="space-y-3">
           <button
             onClick={onPlayNow}
-            className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+            className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25 focus:outline-none focus:ring-2 focus:ring-[#21C7E6]/50"
           >
-            Play HI-LO Game Now
+            Start Earning TRX Now
           </button>
           <button
             onClick={onClose}
-            className="w-full bg-[#1A1A1A] hover:bg-[#1A1A1A]/80 text-white font-medium py-2 px-4 rounded-lg transition-colors border border-[#21C7E6]/20"
+            className="w-full bg-[#1A1A1A] hover:bg-[#1A1A1A]/80 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 border border-[#21C7E6]/20 focus:outline-none focus:ring-2 focus:ring-[#21C7E6]/50"
           >
             Keep My Reward
           </button>
