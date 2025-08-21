@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
+import Banner from './components/Banner';
 import HeroSection from './components/HeroSection';
 import BalanceDisplay from './components/BalanceDisplay';
 import FaucetClaim from './components/FaucetClaim';
@@ -102,6 +103,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0B0B0B] via-[#1A1A1A] to-[#0B0B0B]">
+      <Banner />
       <Navigation
         isAuthenticated={isAuthenticated}
         currentPage={currentPage}
