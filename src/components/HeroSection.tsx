@@ -14,10 +14,10 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
         {/* Hero Content */}
         <div className="mb-16">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#21C7E6] via-[#FF6200] to-[#21C7E6] bg-clip-text text-transparent mb-6">
-            Earn Free TRX: Play Hi-Lo, Stake, & Refer Friends
+            Welcome to TonMax - Your TRX Gateway
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            The ultimate platform to grow your TRX through games, stakes, and referrals.
+            The ultimate platform to earn free TRX through our faucet, exciting games, staking rewards, and referral program.
           </p>
         </div>
 
