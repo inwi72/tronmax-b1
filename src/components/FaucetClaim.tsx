@@ -62,10 +62,11 @@ export default function FaucetClaim({
       {canClaim ? (
         <button
           onClick={handleClaim}
-          className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25"
+          className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25 focus:outline-none focus:ring-2 focus:ring-[#21C7E6]/50"
+          aria-label="Claim free TRX reward"
         >
           <Droplets className="inline mr-2" size={24} />
-          CLAIM FREE TRX
+          START EARNING TRX NOW
         </button>
       ) : (
         <div>
