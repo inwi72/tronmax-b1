@@ -24,7 +24,7 @@ export default function Navigation({
     { id: 'home', label: 'Home', icon: Home },
     { id: 'faucet', label: 'Faucet', icon: Droplets },
     { id: 'staking', label: 'Staking', icon: TrendingUp },
-    { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
+    { id: 'support', label: 'Support', icon: BarChart3 },
   ];
 
   return (
@@ -34,7 +34,7 @@ export default function Navigation({
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-bold bg-gradient-to-r from-[#21C7E6] to-[#FF6200] bg-clip-text text-transparent">
-                TronMaxFaucet
+                TRXFaucet
               </h1>
             </div>
           </div>
