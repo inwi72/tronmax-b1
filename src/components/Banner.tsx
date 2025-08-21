@@ -16,10 +16,11 @@ export default function Banner() {
           </div>
           <div className="hidden md:flex items-center space-x-2 text-white/90">
             <Zap size={16} />
-            <span className="text-sm">No Investment Required • Instant Payouts</span>
+            <span className="text-sm">No Investment Required </span>
           </div>
         </div>
       </div>
     </div>
   );
+
 }
