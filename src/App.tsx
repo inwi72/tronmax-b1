@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
+import HeroSection from './components/HeroSection';
 import BalanceDisplay from './components/BalanceDisplay';
 import FaucetClaim from './components/FaucetClaim';
 import StatsDisplay from './components/StatsDisplay';
@@ -7,6 +8,7 @@ import HiLoGame from './components/HiLoGame';
 import AuthModal from './components/AuthModal';
 import HiLoPopup from './components/HiLoPopup';
 import PageContent from './components/PageContent';
+import Footer from './components/Footer';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -65,6 +67,39 @@ function App() {
     setCurrentPage('home'); // Stay on home where HI-LO game is visible
   };
 
+  const handlePlayHiLoFromHero = () => {
+    if (!isAuthenticated) {
+      setAuthModal('login');
+    } else {
+      // Scroll to HI-LO game section
+      const gameSection = document.getElementById('hilo-game');
+      if (gameSection) {
+        gameSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleStartStaking = () => {
+    setCurrentPage('staking');
+  };
+
+  const handleCopyReferral = async () => {
+    const referralLink = `${window.location.origin}?ref=user123`;
+    try {
+      await navigator.clipboard.writeText(referralLink);
+      alert('Referral link copied to clipboard!');
+    } catch (err) {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = referralLink;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      alert('Referral link copied to clipboard!');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0B0B0B] via-[#1A1A1A] to-[#0B0B0B]">
       <Navigation
@@ -79,14 +114,11 @@ function App() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {currentPage === 'home' ? (
           <>
-            <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#21C7E6] via-[#FF6200] to-[#21C7E6] bg-clip-text text-transparent mb-4">
-                Free TRX Faucet
-              </h1>
-              <p className="text-xl text-[#E5E5E5] max-w-2xl mx-auto">
-                Claim free TRX every hour, play games to multiply your rewards, and build your crypto portfolio
-              </p>
-            </div>
+            <HeroSection
+              onPlayHiLo={handlePlayHiLoFromHero}
+              onStartStaking={handleStartStaking}
+              onCopyReferral={handleCopyReferral}
+            />
 
             <BalanceDisplay balance={balance} isAuthenticated={isAuthenticated} />
             
@@ -100,11 +132,13 @@ function App() {
               />
               
               {isAuthenticated && (
-                <HiLoGame
-                  isAuthenticated={isAuthenticated}
-                  balance={balance}
-                  onBalanceUpdate={setBalance}
-                />
+                <div id="hilo-game">
+                  <HiLoGame
+                    isAuthenticated={isAuthenticated}
+                    balance={balance}
+                    onBalanceUpdate={setBalance}
+                  />
+                </div>
               )}
             </div>
 
@@ -114,6 +148,8 @@ function App() {
           <PageContent page={currentPage} />
         )}
       </div>
+
+      <Footer />
 
       <AuthModal
         isOpen={authModal !== null}
