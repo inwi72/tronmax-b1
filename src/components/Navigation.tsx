@@ -47,7 +47,13 @@ export default function Navigation({
                 return (
                   <button
                     key={item.id}
-                    onClick={() => setCurrentPage(item.id)}
+                    onClick={() => {
+                      if (item.id === 'faucet') {
+                        onRegister();
+                      } else {
+                        setCurrentPage(item.id);
+                      }
+                    }}
                     className={`px-3 py-2 rounded-md text-sm font-medium flex items-center space-x-2 transition-colors ${
                       currentPage === item.id
                         ? 'bg-[#21C7E6]/20 text-[#21C7E6]'
@@ -114,7 +120,11 @@ export default function Navigation({
                   <button
                     key={item.id}
                     onClick={() => {
-                      setCurrentPage(item.id);
+                      if (item.id === 'faucet') {
+                        onRegister();
+                      } else {
+                        setCurrentPage(item.id);
+                      }
                       setIsMobileMenuOpen(false);
                     }}
                     className={`w-full text-left px-3 py-2 rounded-md text-base font-medium flex items-center space-x-2 transition-colors ${
