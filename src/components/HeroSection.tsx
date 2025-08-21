@@ -14,7 +14,7 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
         {/* Hero Content */}
         <div className="mb-16">
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#21C7E6] via-[#FF6200] to-[#21C7E6] bg-clip-text text-transparent mb-6">
-            Welcome to TonMax - Your TRX Gateway
+            Welcome to TronMax - Your TRX Gateway
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             The ultimate platform to earn free TRX through our faucet, exciting games, staking rewards, and referral program.
@@ -91,3 +91,4 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
     </div>
   );
 }
+
