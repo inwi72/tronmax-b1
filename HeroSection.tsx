@@ -1,0 +1,93 @@
+import React from 'react';
+import { TrendingUp, Users, Gamepad2 } from 'lucide-react';
+
+interface HeroSectionProps {
+  onPlayHiLo: () => void;
+  onStartStaking: () => void;
+  onCopyReferral: () => void;
+}
+
+export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral }: HeroSectionProps) {
+  return (
+    <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 py-16 px-4">
+      <div className="max-w-7xl mx-auto text-center">
+        {/* Hero Content */}
+        <div className="mb-16">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[#21C7E6] via-[#FF6200] to-[#21C7E6] bg-clip-text text-transparent mb-6">
+            Earn Free TRX: Play Hi-Lo, Stake, & Refer Friends
+          </h1>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            The ultimate platform to grow your TRX through games, stakes, and referrals.
+          </p>
+        </div>
+
+        {/* Three-Column Feature Highlights */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          {/* Hi-Lo Game Card */}
+          <div className="bg-gray-800 border border-blue-500/20 rounded-xl p-6 hover:border-blue-500/40 transition-colors">
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-[#21C7E6] to-[#FF6200] rounded-full flex items-center justify-center">
+                <Gamepad2 className="text-white" size={32} />
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Hi-Lo Game</h3>
+            <p className="text-gray-300 mb-6">
+              Predict higher or lower to win instant TRX payouts.
+            </p>
+            <button
+              onClick={onPlayHiLo}
+              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+            >
+              Play Now
+            </button>
+          </div>
+
+          {/* Staking Card */}
+          <div className="bg-gray-800 border border-blue-500/20 rounded-xl p-6 hover:border-blue-500/40 transition-colors">
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-[#21C7E6] to-[#FF6200] rounded-full flex items-center justify-center">
+                <TrendingUp className="text-white" size={32} />
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">TRX Staking</h3>
+            <p className="text-gray-300 mb-6">
+              Place your bets and multiply your TRX rewards.
+            </p>
+            <button
+              onClick={onStartStaking}
+              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+            >
+              Start Staking
+            </button>
+          </div>
+
+          {/* Referral Program Card */}
+          <div className="bg-gray-800 border border-blue-500/20 rounded-xl p-6 hover:border-blue-500/40 transition-colors">
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-[#21C7E6] to-[#FF6200] rounded-full flex items-center justify-center">
+                <Users className="text-white" size={32} />
+              </div>
+            </div>
+            <h3 className="text-xl font-bold text-white mb-3">Refer & Earn</h3>
+            <p className="text-gray-300 mb-6">
+              Share your link and earn commission from friends' activities.
+            </p>
+            <button
+              onClick={onCopyReferral}
+              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+            >
+              Copy Referral Link
+            </button>
+          </div>
+        </div>
+
+        {/* Trust & Security Badges */}
+        <div className="flex justify-center space-x-6 text-sm text-gray-300">
+          <span>🔒 Secure</span>
+          <span>⚡ Instant Free TRX</span>
+          <span>📊 Provably Fair</span>
+        </div>
+      </div>
+    </div>
+  );
+}
