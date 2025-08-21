@@ -34,7 +34,7 @@ export default function Navigation({
           <div className="flex items-center">
             <div className="flex-shrink-0">
               <h1 className="text-2xl font-bold bg-gradient-to-r from-[#21C7E6] to-[#FF6200] bg-clip-text text-transparent">
-                TRXFaucet
+                TronMaxFaucet
               </h1>
             </div>
           </div>
