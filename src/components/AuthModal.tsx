@@ -95,7 +95,7 @@ export default function AuthModal({ isOpen, type, onClose, onSubmit }: AuthModal
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+            className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25 focus:outline-none focus:ring-2 focus:ring-[#21C7E6]/50"
           >
             {type === 'login' ? 'Login' : 'Create Account'}
           </button>
