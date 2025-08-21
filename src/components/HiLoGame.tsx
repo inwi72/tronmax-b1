@@ -116,9 +116,10 @@ export default function HiLoGame({ isAuthenticated, balance, onBalanceUpdate }: 
           {!gameActive && currentNumber === null ? (
             <button
               onClick={startGame}
-              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-4 px-6 rounded-lg transition-colors"
+              className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25 focus:outline-none focus:ring-2 focus:ring-[#21C7E6]/50"
+              aria-label="Start Hi-Lo game"
             >
-              Start Game
+              Start Earning TRX Now
             </button>
           ) : gameActive ? (
             <div className="space-y-3">
@@ -127,14 +128,16 @@ export default function HiLoGame({ isAuthenticated, balance, onBalanceUpdate }: 
               </p>
               <button
                 onClick={() => makeGuess('higher')}
-                className="w-full bg-gradient-to-r from-[#21C7E6] to-[#21C7E6]/80 hover:from-[#21C7E6]/80 hover:to-[#21C7E6]/60 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                className="w-full bg-gradient-to-r from-[#21C7E6] to-[#21C7E6]/80 hover:from-[#21C7E6]/80 hover:to-[#21C7E6]/60 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25 flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-[#21C7E6]/50"
+                aria-label="Guess higher number"
               >
                 <TrendingUp size={20} />
                 <span>Higher</span>
               </button>
               <button
                 onClick={() => makeGuess('lower')}
-                className="w-full bg-gradient-to-r from-[#FF6200] to-[#FF6200]/80 hover:from-[#FF6200]/80 hover:to-[#FF6200]/60 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
+                className="w-full bg-gradient-to-r from-[#FF6200] to-[#FF6200]/80 hover:from-[#FF6200]/80 hover:to-[#FF6200]/60 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#FF6200]/25 flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-[#FF6200]/50"
+                aria-label="Guess lower number"
               >
                 <TrendingDown size={20} />
                 <span>Lower</span>
@@ -144,13 +147,13 @@ export default function HiLoGame({ isAuthenticated, balance, onBalanceUpdate }: 
             <div className="space-y-3">
               <button
                 onClick={startGame}
-                className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+                className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25 focus:outline-none focus:ring-2 focus:ring-[#21C7E6]/50"
               >
-                Play Again
+                Start Earning TRX Now
               </button>
               <button
                 onClick={resetGame}
-                className="w-full bg-[#1A1A1A] hover:bg-[#1A1A1A]/80 text-white font-medium py-2 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2 border border-[#21C7E6]/20"
+                className="w-full bg-[#1A1A1A] hover:bg-[#1A1A1A]/80 text-white font-medium py-2 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 border border-[#21C7E6]/20 focus:outline-none focus:ring-2 focus:ring-[#21C7E6]/50"
               >
                 <RotateCcw size={16} />
                 <span>Reset</span>
