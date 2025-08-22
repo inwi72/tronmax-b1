@@ -20,7 +20,7 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
             The ultimate platform to earn free TRX through our faucet, exciting games, staking rewards, and referral program.
           </p>
           <div className="bg-[#1A1A1A] border border-[#21C7E6]/30 rounded-lg p-6 max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-white mb-4">Why Choose TonMax?</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">Why Choose TronMax?</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-[#21C7E6] rounded-full"></div>
@@ -108,4 +108,5 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
     </div>
   );
 }
+
 
