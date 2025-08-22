@@ -10,6 +10,7 @@ import AuthModal from './components/AuthModal';
 import HiLoPopup from './components/HiLoPopup';
 import PageContent from './components/PageContent';
 import Footer from './components/Footer';
+import UserOnboarding from './components/UserOnboarding';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -122,7 +123,11 @@ function App() {
               onCopyReferral={handleCopyReferral}
             />
 
-            <BalanceDisplay balance={balance} isAuthenticated={isAuthenticated} />
+            {!isAuthenticated ? (
+              <UserOnboarding onGetStarted={() => setAuthModal('register')} />
+            ) : (
+              <BalanceDisplay balance={balance} isAuthenticated={isAuthenticated} />
+            )}
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
               <FaucetClaim
