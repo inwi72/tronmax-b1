@@ -195,12 +195,6 @@ export default function PageContent({ page }: PageContentProps) {
                 required
               />
             </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25 flex items-center justify-center space-x-2"
@@ -209,5 +203,9 @@ export default function PageContent({ page }: PageContentProps) {
               <span>Send Message</span>
             </button>
           </form>
+        </div>
+      </div>
+    );
+  }
   return null;
 }
