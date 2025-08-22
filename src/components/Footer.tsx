@@ -35,9 +35,10 @@ export default function Footer() {
           </a>
         </div>
         <div className="text-xs text-[#A0A0A0]">
-          © 2025 TonMax. All rights reserved.
+          © 2025 TronMax. All rights reserved.
         </div>
       </div>
     </footer>
   );
 }
+
