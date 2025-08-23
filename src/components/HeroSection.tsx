@@ -108,5 +108,3 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
     </div>
   );
 }
-
-
