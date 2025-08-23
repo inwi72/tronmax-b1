@@ -119,9 +119,7 @@ function App() {
         {currentPage === 'home' ? (
           <>
             <HeroSection
-              onPlayHiLo={handlePlayHiLoFromHero}
-              onStartStaking={handleStartStaking}
-              onCopyReferral={handleCopyReferral}
+              onRegister={() => setAuthModal('register')}
             />
 
             {!isAuthenticated ? (
