@@ -11,6 +11,7 @@ import HiLoPopup from './components/HiLoPopup';
 import PageContent from './components/PageContent';
 import Footer from './components/Footer';
 import UserOnboarding from './components/UserOnboarding';
+import AboutTronMax from './components/AboutTronMax';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -25,8 +26,8 @@ function App() {
   const stats = {
     totalUsers: 45678,
     totalClaimed: 2345678,
-    totalPayouts: 98765,
-    avgClaimTime: '45 min',
+    totalPayouts: 98785,
+    avgClaimTime: '2.5 min',
   };
 
   // Countdown timer effect
@@ -129,17 +130,21 @@ function App() {
               <BalanceDisplay balance={balance} isAuthenticated={isAuthenticated} />
             )}
             
+            <AboutTronMax />
+            
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-              <FaucetClaim
-                isAuthenticated={isAuthenticated}
-                canClaim={canClaim}
-                timeLeft={timeLeft}
-                onClaim={handleClaim}
-                onShowHiLoPopup={() => setShowHiLoPopup(true)}
-              />
+              {isAuthenticated && (
+                <FaucetClaim
+                  isAuthenticated={isAuthenticated}
+                  canClaim={canClaim}
+                  timeLeft={timeLeft}
+                  onClaim={handleClaim}
+                  onShowHiLoPopup={() => setShowHiLoPopup(true)}
+                />
+              )}
               
               {isAuthenticated && (
-                <div id="hilo-game">
+                <div id="hilo-game" className={!isAuthenticated ? 'lg:col-span-2' : ''}>
                   <HiLoGame
                     isAuthenticated={isAuthenticated}
                     balance={balance}
