@@ -166,6 +166,7 @@ function App() {
         type={authModal || 'login'}
         onClose={() => setAuthModal(null)}
         onSubmit={authModal === 'login' ? handleLogin : handleRegister}
+        onSwitchType={setAuthModal}
       />
 
       <HiLoPopup
