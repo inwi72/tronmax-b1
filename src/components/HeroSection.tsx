@@ -2,12 +2,10 @@ import React from 'react';
 import { TrendingUp, Users, Gamepad2 } from 'lucide-react';
 
 interface HeroSectionProps {
-  onPlayHiLo: () => void;
-  onStartStaking: () => void;
-  onCopyReferral: () => void;
+  onRegister: () => void;
 }
 
-export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral }: HeroSectionProps) {
+export default function HeroSection({ onRegister }: HeroSectionProps) {
   return (
     <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 py-16 px-4">
       <div className="max-w-7xl mx-auto text-center">
@@ -52,10 +50,10 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
               Predict higher or lower to win instant TRX payouts.
             </p>
             <button
-              onClick={onPlayHiLo}
+              onClick={onRegister}
               className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25"
             >
-              Start Earning TRX Now
+              Sign Up to Play
             </button>
           </div>
 
@@ -71,10 +69,10 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
               Place your bets and multiply your TRX rewards.
             </p>
             <button
-              onClick={onStartStaking}
+              onClick={onRegister}
               className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25"
             >
-              Start Earning TRX Now
+              Register to Earn
             </button>
           </div>
 
@@ -90,10 +88,10 @@ export default function HeroSection({ onPlayHiLo, onStartStaking, onCopyReferral
               Share your link and earn commission from friends' activities.
             </p>
             <button
-              onClick={onCopyReferral}
+              onClick={onRegister}
               className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25"
             >
-              Start Earning TRX Now
+              Sign Up & Earn
             </button>
           </div>
         </div>
