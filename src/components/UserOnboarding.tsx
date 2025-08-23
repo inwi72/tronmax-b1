@@ -57,7 +57,7 @@ export default function UserOnboarding({ onGetStarted }: UserOnboardingProps) {
 
         {/* Trust indicator */}
         <p className="text-xs text-[#A0A0A0] mt-4">
-          Join thousands of users already earning free TRX
+          Join 45,000+ users already earning free TRX with TronMax
         </p>
       </div>
     </div>
