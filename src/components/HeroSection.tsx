@@ -53,7 +53,9 @@ export default function HeroSection({ onRegister }: HeroSectionProps) {
               onClick={onRegister}
               className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25"
             >
-              Sign Up to Play
+              <a href="/register" className="block w-full h-full">
+                Sign Up to Play
+              </a>
             </button>
           </div>
 
@@ -72,7 +74,9 @@ export default function HeroSection({ onRegister }: HeroSectionProps) {
               onClick={onRegister}
               className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25"
             >
-              Register to Earn
+              <a href="/register" className="block w-full h-full">
+                Register to Earn
+              </a>
             </button>
           </div>
 
@@ -91,7 +95,9 @@ export default function HeroSection({ onRegister }: HeroSectionProps) {
               onClick={onRegister}
               className="w-full bg-gradient-to-r from-[#21C7E6] to-[#FF6200] hover:from-[#21C7E6]/80 hover:to-[#FF6200]/80 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-[#21C7E6]/25"
             >
-              Sign Up & Earn
+              <a href="/register" className="block w-full h-full">
+                Sign Up & Earn
+              </a>
             </button>
           </div>
         </div>
