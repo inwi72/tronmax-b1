@@ -57,7 +57,7 @@ export default function StatsDisplay({ stats }: StatsDisplayProps) {
                 <Icon className={item.color} size={24} />
               </div>
               <div className="text-2xl font-bold text-white mb-1">{item.value}</div>
-              <div className="text-[#A0A0A0] text-sm">{item.label}</div>
+              <div className="text-[#A0A0A0] text-sm font-medium">{item.label}</div>
             </div>
           );
         })}
