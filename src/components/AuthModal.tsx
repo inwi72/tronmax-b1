@@ -8,7 +8,15 @@ interface AuthModalProps {
   onSubmit: (email: string, password: string, username?: string) => void;
 }
 
-export default function AuthModal({ isOpen, type, onClose, onSubmit }: AuthModalProps) {
+interface AuthModalProps {
+  isOpen: boolean;
+  type: 'login' | 'register';
+  onClose: () => void;
+  onSubmit: (email: string, password: string, username?: string) => void;
+  onSwitchType: (newType: 'login' | 'register') => void;
+}
+
+export default function AuthModal({ isOpen, type, onClose, onSubmit, onSwitchType }: AuthModalProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -104,12 +112,16 @@ export default function AuthModal({ isOpen, type, onClose, onSubmit }: AuthModal
         <div className="mt-4 text-center">
           <p className="text-[#A0A0A0] text-sm">
             {type === 'login' ? "Don't have an account? " : 'Already have an account? '}
-            <button
-              onClick={() => {/* Switch modal type */}}
+            <a
+              href={type === 'login' ? '/register' : '/login'}
+              onClick={(e) => {
+                e.preventDefault();
+                onSwitchType(type === 'login' ? 'register' : 'login');
+              }}
               className="text-[#21C7E6] hover:text-[#21C7E6]/80 font-medium"
             >
-              {type === 'login' ? 'Register' : 'Login'}
-            </button>
+              {type === 'login' ? 'Sign Up' : 'Sign In'}
+            </a>
           </p>
         </div>
       </div>
