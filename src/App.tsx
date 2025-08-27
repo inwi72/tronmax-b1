@@ -22,6 +22,8 @@ function App() {
   const [authModal, setAuthModal] = useState<'login' | 'register' | null>(null);
   const [showHiLoPopup, setShowHiLoPopup] = useState(false);
   const [lastClaimAmount, setLastClaimAmount] = useState(0);
+  const [backendMessage, setBackendMessage] = useState("");
+  const [showBackendTest, setShowBackendTest] = useState(false);
 
   const stats = {
     totalUsers: 45678,
@@ -30,6 +32,15 @@ function App() {
     avgClaimTime: '2.5 min',
   };
 
+  const callBackend = async () => {
+    try {
+      const res = await fetch("http://localhost:3001/faucet-test");
+      const data = await res.json();
+      setBackendMessage(data.message);
+    } catch (err) {
+      setBackendMessage("❌ Backend not reachable");
+    }
+  };
   // Countdown timer effect
   useEffect(() => {
     if (!canClaim && timeLeft > 0) {
@@ -116,6 +127,30 @@ function App() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Backend Test Section */}
+        <div className="mb-8 text-center">
+          <button
+            onClick={() => setShowBackendTest(!showBackendTest)}
+            className="mb-4 px-4 py-2 bg-[#21C7E6] hover:bg-[#21C7E6]/80 text-white rounded-lg transition-colors"
+          >
+            {showBackendTest ? 'Hide' : 'Show'} Backend Test
+          </button>
+          
+          {showBackendTest && (
+            <div className="bg-gradient-to-r from-[#1A1A1A] to-[#0B0B0B] rounded-xl p-6 border border-[#21C7E6]/30 max-w-md mx-auto">
+              <h2 className="text-2xl font-bold text-white mb-4">TronMax Frontend</h2>
+              <button
+                onClick={callBackend}
+                className="px-6 py-3 bg-[#FF6200] hover:bg-[#FF6200]/80 text-white rounded-lg shadow transition-colors"
+              >
+                Test Backend
+              </button>
+              {backendMessage && (
+                <p className="mt-4 text-lg font-semibold text-[#21C7E6]">{backendMessage}</p>
+              )}
+            </div>
+          )}
+        </div>
         {currentPage === 'home' ? (
           <>
             <HeroSection
