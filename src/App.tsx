@@ -2,206 +2,197 @@ import React, { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Banner from './components/Banner';
 import HeroSection from './components/HeroSection';
+import UserOnboarding from './components/UserOnboarding';
 import BalanceDisplay from './components/BalanceDisplay';
 import FaucetClaim from './components/FaucetClaim';
-import StatsDisplay from './components/StatsDisplay';
 import HiLoGame from './components/HiLoGame';
-import AuthModal from './components/AuthModal';
-import HiLoPopup from './components/HiLoPopup';
+import AboutTronMax from './components/AboutTronMax';
+import StatsDisplay from './components/StatsDisplay';
 import PageContent from './components/PageContent';
 import Footer from './components/Footer';
-import UserOnboarding from './components/UserOnboarding';
-import AboutTronMax from './components/AboutTronMax';
+import AuthModal from './components/AuthModal';
+import HiLoPopup from './components/HiLoPopup';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentPage, setCurrentPage] = useState('home');
-  const [balance, setBalance] = useState(5.234567);
-  const [canClaim, setCanClaim] = useState(true);
-  const [timeLeft, setTimeLeft] = useState(0);
-  const [authModal, setAuthModal] = useState<'login' | 'register' | null>(null);
-  const [showHiLoPopup, setShowHiLoPopup] = useState(false);
-  const [lastClaimAmount, setLastClaimAmount] = useState(0);
-  const [backendMessage, setBackendMessage] = useState("");
-  const [showBackendTest, setShowBackendTest] = useState(false);
+  // Backend testing state
+  const [backendMessage, setBackendMessage] = useState<string | null>(null);
 
-  const stats = {
-    totalUsers: 45678,
-    totalClaimed: 2345678,
-    totalPayouts: 98785,
-    avgClaimTime: '2.5 min',
-  };
-
-  const callBackend = async () => {
+  const testBackend = async () => {
     try {
-      const res = await fetch("http://localhost:3001/faucet-test");
-      const data = await res.json();
+      const response = await fetch("http://localhost:3001/faucet-test");
+      const data = await response.json();
       setBackendMessage(data.message);
     } catch (err) {
       setBackendMessage("❌ Backend not reachable");
     }
   };
-  // Countdown timer effect
+
+  // Existing app state
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentPage, setCurrentPage] = useState('home');
+  const [balance, setBalance] = useState(0);
+  const [canClaim, setCanClaim] = useState(true);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [authModal, setAuthModal] = useState<{ isOpen: boolean; type: 'login' | 'register' }>({
+    isOpen: false,
+    type: 'login'
+  });
+  const [showHiLoPopup, setShowHiLoPopup] = useState(false);
+  const [lastClaimAmount, setLastClaimAmount] = useState(0);
+
+  const stats = {
+    totalUsers: 45127,
+    totalClaimed: 2847392,
+    totalPayouts: 18493,
+    avgClaimTime: '2.3s'
+  };
+
   useEffect(() => {
+    let interval: NodeJS.Timeout;
     if (!canClaim && timeLeft > 0) {
-      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-      return () => clearTimeout(timer);
-    } else if (timeLeft === 0 && !canClaim) {
-      setCanClaim(true);
+      interval = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            setCanClaim(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
     }
+    return () => clearInterval(interval);
   }, [canClaim, timeLeft]);
 
-  const handleClaim = () => {
-    const claimAmount = Math.random() * (0.5 - 0.1) + 0.1; // Random between 0.1-0.5
-    setBalance(balance + claimAmount);
-    setLastClaimAmount(claimAmount);
-    setCanClaim(false);
-    setTimeLeft(3600); // 1 hour cooldown
+  const handleLogin = () => {
+    setAuthModal({ isOpen: true, type: 'login' });
   };
 
-  const handleLogin = (email: string, password: string) => {
-    // Mock login
-    setIsAuthenticated(true);
-    setAuthModal(null);
+  const handleRegister = () => {
+    setAuthModal({ isOpen: true, type: 'register' });
   };
 
-  const handleRegister = (email: string, password: string, username: string) => {
-    // Mock register
+  const handleAuthSubmit = (email: string, password: string, username?: string) => {
     setIsAuthenticated(true);
-    setAuthModal(null);
+    setBalance(0.125000);
+    setAuthModal({ isOpen: false, type: 'login' });
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+    setBalance(0);
+    setCanClaim(true);
+    setTimeLeft(0);
     setCurrentPage('home');
+  };
+
+  const handleClaim = () => {
+    const claimAmount = Math.random() * (0.5 - 0.1) + 0.1;
+    setBalance(balance + claimAmount);
+    setLastClaimAmount(claimAmount);
+    setCanClaim(false);
+    setTimeLeft(3600); // 1 hour in seconds
+  };
+
+  const handleBalanceUpdate = (newBalance: number) => {
+    setBalance(newBalance);
+  };
+
+  const handleShowHiLoPopup = () => {
+    setShowHiLoPopup(true);
   };
 
   const handlePlayHiLo = () => {
     setShowHiLoPopup(false);
-    setCurrentPage('home'); // Stay on home where HI-LO game is visible
-  };
-
-  const handlePlayHiLoFromHero = () => {
-    if (!isAuthenticated) {
-      setAuthModal('login');
-    } else {
-      // Scroll to HI-LO game section
-      const gameSection = document.getElementById('hilo-game');
-      if (gameSection) {
-        gameSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
-
-  const handleStartStaking = () => {
-    setCurrentPage('staking');
-  };
-
-  const handleCopyReferral = async () => {
-    const referralLink = `${window.location.origin}?ref=user123`;
-    try {
-      await navigator.clipboard.writeText(referralLink);
-      alert('Referral link copied to clipboard!');
-    } catch (err) {
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea');
-      textArea.value = referralLink;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      alert('Referral link copied to clipboard!');
+    // Scroll to HiLo game section or focus on it
+    const hiloSection = document.getElementById('hilo-game');
+    if (hiloSection) {
+      hiloSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0B0B0B] via-[#1A1A1A] to-[#0B0B0B]">
+    <div className="min-h-screen bg-[#0B0B0B] text-white">
+      {/* Backend Test Section */}
+      <div style={{ padding: "1rem", backgroundColor: "#1A1A1A", borderBottom: "1px solid #21C7E6" }}>
+        <h2 style={{ color: "#21C7E6", marginBottom: "1rem" }}>Backend Connection Test</h2>
+        <button
+          onClick={testBackend}
+          style={{
+            padding: "0.5rem 1rem",
+            fontSize: "1rem",
+            background: "#21C7E6",
+            color: "#fff",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+            marginRight: "1rem"
+          }}
+        >
+          Test Backend
+        </button>
+        {backendMessage && (
+          <span style={{ fontWeight: "bold", color: backendMessage.includes("❌") ? "#FF6200" : "#21C7E6" }}>
+            {backendMessage}
+          </span>
+        )}
+      </div>
+
       <Banner />
       <Navigation
         isAuthenticated={isAuthenticated}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        onLogin={() => setAuthModal('login')}
-        onRegister={() => setAuthModal('register')}
+        onLogin={handleLogin}
+        onRegister={handleRegister}
         onLogout={handleLogout}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Backend Test Section */}
-        <div className="mb-8 text-center">
-          <button
-            onClick={() => setShowBackendTest(!showBackendTest)}
-            className="mb-4 px-4 py-2 bg-[#21C7E6] hover:bg-[#21C7E6]/80 text-white rounded-lg transition-colors"
-          >
-            {showBackendTest ? 'Hide' : 'Show'} Backend Test
-          </button>
-          
-          {showBackendTest && (
-            <div className="bg-gradient-to-r from-[#1A1A1A] to-[#0B0B0B] rounded-xl p-6 border border-[#21C7E6]/30 max-w-md mx-auto">
-              <h2 className="text-2xl font-bold text-white mb-4">TronMax Frontend</h2>
-              <button
-                onClick={callBackend}
-                className="px-6 py-3 bg-[#FF6200] hover:bg-[#FF6200]/80 text-white rounded-lg shadow transition-colors"
-              >
-                Test Backend
-              </button>
-              {backendMessage && (
-                <p className="mt-4 text-lg font-semibold text-[#21C7E6]">{backendMessage}</p>
-              )}
-            </div>
-          )}
-        </div>
-        {currentPage === 'home' ? (
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {currentPage === 'home' && (
           <>
-            <HeroSection
-              onRegister={() => setAuthModal('register')}
-            />
-
-            {!isAuthenticated ? (
-              <UserOnboarding onGetStarted={() => setAuthModal('register')} />
-            ) : (
-              <BalanceDisplay balance={balance} isAuthenticated={isAuthenticated} />
+            <HeroSection onRegister={handleRegister} />
+            
+            {!isAuthenticated && (
+              <UserOnboarding onGetStarted={handleRegister} />
             )}
-            
-            <AboutTronMax />
-            
+
+            <BalanceDisplay balance={balance} isAuthenticated={isAuthenticated} />
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-              {isAuthenticated && (
-                <FaucetClaim
+              <FaucetClaim
+                isAuthenticated={isAuthenticated}
+                canClaim={canClaim}
+                timeLeft={timeLeft}
+                onClaim={handleClaim}
+                onShowHiLoPopup={handleShowHiLoPopup}
+              />
+              <div id="hilo-game">
+                <HiLoGame
                   isAuthenticated={isAuthenticated}
-                  canClaim={canClaim}
-                  timeLeft={timeLeft}
-                  onClaim={handleClaim}
-                  onShowHiLoPopup={() => setShowHiLoPopup(true)}
+                  balance={balance}
+                  onBalanceUpdate={handleBalanceUpdate}
                 />
-              )}
-              
-              {isAuthenticated && (
-                <div id="hilo-game" className={!isAuthenticated ? 'lg:col-span-2' : ''}>
-                  <HiLoGame
-                    isAuthenticated={isAuthenticated}
-                    balance={balance}
-                    onBalanceUpdate={setBalance}
-                  />
-                </div>
-              )}
+              </div>
             </div>
 
+            <AboutTronMax />
             <StatsDisplay stats={stats} />
           </>
-        ) : (
+        )}
+
+        {(currentPage === 'staking' || currentPage === 'support') && (
           <PageContent page={currentPage} />
         )}
-      </div>
+      </main>
 
       <Footer />
 
       <AuthModal
-        isOpen={authModal !== null}
-        type={authModal || 'login'}
-        onClose={() => setAuthModal(null)}
-        onSubmit={authModal === 'login' ? handleLogin : handleRegister}
-        onSwitchType={setAuthModal}
+        isOpen={authModal.isOpen}
+        type={authModal.type}
+        onClose={() => setAuthModal({ ...authModal, isOpen: false })}
+        onSubmit={handleAuthSubmit}
+        onSwitchType={(newType) => setAuthModal({ isOpen: true, type: newType })}
       />
 
       <HiLoPopup
